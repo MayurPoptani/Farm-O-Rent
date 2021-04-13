@@ -9,39 +9,41 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: myDrawer(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text("Dashboard", style: TextStyle(color: Colors.black),),
+      ),
       body: Container(
-        alignment: Alignment.center,
-        child: Text("Dashboard Page"),
+        margin: EdgeInsets.all(16),
+        child: ListView(
+          children: [
+            menuItem("Rent Tools"),
+            menuItem("Rent Vehicles"),
+            menuItem("Rent Warehouses"),
+            menuItem("Sell Tools"),
+            menuItem("Sell Vehicles"),
+          ],
+        ),
       ),
     );
   }
 
-  Widget myDrawer() => Drawer(
-    child: SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          menuItem("Rent Items"),
-          menuItem("Rent Vehicles"),
-          menuItem("Sell Items/Vehicles"),
-          Spacer(),
-          menuItem("Logout", onClick: () {
-            Navigator.of(context).pop();
-          }),
-        ],
-      ),
-    ),
-  );
-
-  Widget menuItem(String text, {Function onClick}) {
-    return TextButton(
+  Widget menuItem(String str) {
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      elevation: 4,
       child: Container(
-        margin: EdgeInsets.only(left: 16),
-        width: double.maxFinite,
-        child: Text(text)
+        padding: EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Icon(Icons.add_shopping_cart_sharp),
+            SizedBox(width: 16,),
+            Text(str, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+          ],
+        ),
       ),
-      onPressed: onClick,
     );
   }
+
 }
