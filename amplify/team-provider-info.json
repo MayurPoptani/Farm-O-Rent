@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-farmorent-dev-140944-authRole",
+      "UnauthRoleArn": "arn:aws:iam::108194666588:role/amplify-farmorent-dev-140944-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::108194666588:role/amplify-farmorent-dev-140944-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-farmorent-dev-140944-deployment",
+      "UnauthRoleName": "amplify-farmorent-dev-140944-unauthRole",
+      "StackName": "amplify-farmorent-dev-140944",
+      "StackId": "arn:aws:cloudformation:ap-south-1:108194666588:stack/amplify-farmorent-dev-140944/50d3ecb0-9e8f-11eb-a483-065011102e70",
+      "AmplifyAppId": "d2wek5rdaq7fdc"
+    },
+    "categories": {
+      "auth": {
+        "farmorentea5d7f8b": {}
+      }
+    }
+  }
+}

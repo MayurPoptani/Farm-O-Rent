@@ -1,0 +1,61 @@
+{
+    "identityPoolName": "farmorentea5d7f8b_identitypool_ea5d7f8b",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "farmorea5d7f8b",
+    "userPoolName": "farmorentea5d7f8b_userpool_ea5d7f8b",
+    "autoVerifiedAttributes": [
+        "email"
+    ],
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+        "SMS Text Message"
+    ],
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
+    "defaultPasswordPolicy": false,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [],
+    "requiredAttributes": [
+        "name",
+        "phone_number"
+    ],
+    "userpoolClientGenerateSecret": false,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientWriteAttributes": [
+        "email"
+    ],
+    "userpoolClientReadAttributes": [
+        "email"
+    ],
+    "userpoolClientLambdaRole": "farmorea5d7f8b_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": false,
+    "sharedId": "ea5d7f8b",
+    "resourceName": "farmorentea5d7f8b",
+    "authSelections": "identityPoolAndUserPool",
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    },
+    "unauthRoleArn": {
+        "Fn::GetAtt": [
+            "UnauthRole",
+            "Arn"
+        ]
+    },
+    "useDefault": "default",
+    "usernameAttributes": [
+        "phone_number"
+    ],
+    "triggers": "{}",
+    "userPoolGroupList": [],
+    "serviceName": "Cognito",
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
+    "dependsOn": []
+}

@@ -1,5 +1,8 @@
+import 'package:amplify_flutter/amplify.dart';
+import 'package:farm_o_rent/Dashboard.dart';
 import 'package:farm_o_rent/Signup.dart';
 import 'package:flutter/material.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -7,6 +10,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  TextEditingController phoneC = TextEditingController(text: "+919876543210");
+  TextEditingController pinC = TextEditingController(text: "123456");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 16,),
               TextFormField(
+                controller: phoneC,
                 decoration: InputDecoration(
                   labelText: "Phone Number",
                   hintText: "10 Digit Pin Number",
@@ -41,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Expanded(
                     child: TextFormField(
+                      controller: pinC,
                       decoration: InputDecoration(
                         labelText: "Pin Number",
                         hintText: "4 Digit Pin Number",
@@ -54,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text("Login", style: TextStyle(color: Colors.white,),),
                     ),
                     onPressed: () {
-                      
+                      signIn();
                     },
                   ),
                 ],
@@ -82,7 +91,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    
                   ],
                 ),
               ),
@@ -92,4 +100,35 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  signIn() async {
+    try {
+      await Amplify.Auth.signOut();
+      SignInResult result =  await Amplify.Auth.signIn(
+        username: phoneC.text.trim(), 
+        password: pinC.text.trim(),
+      );
+      if(result.isSignedIn) {
+        print("SIGN IN SUCCESS");
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => Dashboard()), (route) => false);
+      } else {
+        // TODO: Promt user that id pass are wrong, check input
+        print("SING IN FAILURE");
+        print(result.nextStep.signInStep + " = " + result.nextStep.additionalInfo.toString());
+      }
+      
+    } on UserNotConfirmedException catch (e) {
+      print("===UserNotConfirmedException===\n"+e.toString());
+      print("RESENDING SIGNUP CODE");
+      Amplify.Auth.resendSignUpCode(username: phoneC.text.trim());
+      // print(res.codeDeliveryDetails.toString());
+    } on UserNotFoundException catch (e) {
+      print("=== USER NOT FOUND EXCEPTION");
+      print(e.message + " = " + e.recoverySuggestion + " = " + e.underlyingException);
+    } on AuthException catch (e) {
+      print("=== AUTH EXCEPTION");
+      print(e.message + " = " + e.recoverySuggestion + " = " + e.underlyingException);
+    }
+  }
+
 }

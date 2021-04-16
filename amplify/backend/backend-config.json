@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "farmorentea5d7f8b": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
